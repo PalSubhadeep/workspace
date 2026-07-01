@@ -26,16 +26,29 @@ test.describe("CURA Healthcare Service", () => {
 
     //✅Dropdown
     await expect(page.getByLabel("Facility")).toHaveValue("Tokyo CURA Healthcare Center"); // check the default value of the dropdown
-    //await page .getByLabel("Facility").selectOption({"label": "Seoul CURA Healthcare Center"});
+    //await page .getByLabel("Facility").selectOption({"label": "Seoul CURA Healthcare Center"});// select by perticular label
     await page.getByLabel("Facility").selectOption({"index":2});// select by index
+    //assertion to check the value of the dropdown after selecting the option(how much options are their in the dropdown)
+    let drpdown = page.getByLabel("Facility").locator("option");
+    await expect(drpdown).toHaveCount(3);
+    //get all dropdown options and print them in the console
+    let listofoptions = await page.getByLabel("Facility").all();
+    for(let ele in listofoptions){
+      console.log(await listofoptions[ele].textContent());
+    }
 
-    // await page
-    //   .getByLabel("Facility")
-    //   .selectOption("Hongkong CURA Healthcare Center");
+    //checkbox
     await page
       .getByRole("checkbox", { name: "Apply for hospital readmission" })
-      .check();
-    await page.getByRole("radio", { name: "Medicaid" }).check();
+      .check();//can use uncheck too
+    
+    
+    //✅radio button assertion and selection
+    await expect(page.getByText("Medicare")).toBeChecked();
+    await page.getByText("Medicaid").click();// can use click or check to select the radio button
+    await expect(page.getByText("Medicare")).not.toBeChecked(); // it checks the radio button is not checked
+
+    
     await page.locator("span").click();
     await page.getByRole("columnheader", { name: "June" }).click();
     await page.getByRole("columnheader", { name: "2026" }).click();
