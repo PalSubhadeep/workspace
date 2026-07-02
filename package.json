@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "hello.js",
-
   "scripts": {
     "login": "npx playwright test tests/functional/login.spec.ts --headed",
-    "demo": "npx playwright test tests/demo/mytest.spec.ts --headed"
+    "demo": "npx playwright test tests/demo/mytest.spec.ts --headed",
+    "demoui": "npx playwright test tests/demo/debug_checkout.spec.ts --ui --headed",
+    "demoPW": "set PWDEBUG=1 && npx playwright test tests/demo/debug_checkout.spec.ts",
+    "Mytest": "npx playwright test tests/functional/inventory.spec.ts --headed",
+    "GllStudent": "npx playwright test tests/functional/gll_student.spec.ts --headed"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +17,7 @@
   "type": "commonjs",
   "devDependencies": {
     "@playwright/test": "^1.61.1",
-    "@types/node": "^26.0.0"
+    "@types/node": "^26.0.0",
+    "allure-playwright": "^3.10.2"
   }
 }

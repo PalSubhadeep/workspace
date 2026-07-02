@@ -1,5 +1,10 @@
 import { defineConfig, devices } from '@playwright/test';
 
+// Provide a minimal declaration for `process` to satisfy TypeScript when
+// @types/node is not installed. For a proper fix, install @types/node and
+// add "node" to the "types" in your tsconfig.json.
+declare const process: any;
+
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -22,7 +27,7 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter: [['html'],['allure-playwright']],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
@@ -30,7 +35,9 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
-    ignoreHTTPSErrors : true
+    ignoreHTTPSErrors : true,
+    //navigationTimeout: 60000 // if my application is taking more time to load, then we can increase the timeout value
+
   },
 
   /* Configure projects for major browsers */
@@ -40,7 +47,7 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'] },
     },
 
-    {
+    /*{
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
     },
@@ -48,7 +55,7 @@ export default defineConfig({
     {
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },
-    },
+    },*/
 
     /* Test against mobile viewports. */
     // {
