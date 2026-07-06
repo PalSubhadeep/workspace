@@ -36,6 +36,7 @@ export default defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
     ignoreHTTPSErrors : true,
+    screenshot: 'only-on-failure', // capture screenshot on failure
     //navigationTimeout: 60000 // if my application is taking more time to load, then we can increase the timeout value
 
   },

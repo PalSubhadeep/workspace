@@ -5,11 +5,12 @@
   "main": "hello.js",
   "scripts": {
     "login": "npx playwright test tests/functional/login.spec.ts --headed",
-    "demo": "npx playwright test tests/demo/mytest.spec.ts --headed",
+    "demo": "npx playwright test tests/demo/demo.spec.ts --headed",
     "demoui": "npx playwright test tests/demo/debug_checkout.spec.ts --ui --headed",
     "demoPW": "set PWDEBUG=1 && npx playwright test tests/demo/debug_checkout.spec.ts",
     "Mytest": "npx playwright test tests/functional/inventory.spec.ts --headed",
-    "GllStudent": "npx playwright test tests/functional/gll_student.spec.ts --headed"
+    "GllStudent": "npx playwright test tests/functional/gll_student.spec.ts --headed",
+    "gllShareMail": "npx playwright test tests/functional/gll_share_viaMail.spec.ts --headed"
   },
   "keywords": [],
   "author": "",
@@ -17,7 +18,12 @@
   "type": "commonjs",
   "devDependencies": {
     "@playwright/test": "^1.61.1",
+    "@types/mailparser": "^3.4.6",
     "@types/node": "^26.0.0",
-    "allure-playwright": "^3.10.2"
+    "allure-playwright": "^3.10.2",
+    "dotenv": "^17.4.2",
+    "imapflow": "^1.4.6",
+    "mailparser": "^3.9.14",
+    "typescript": "^6.0.3"
   }
 }
